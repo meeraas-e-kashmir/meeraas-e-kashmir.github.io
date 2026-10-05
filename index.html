@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meeraas-e-Kashmir · High-Density Apple Orchards</title>
+<meta name="description" content="Meeraas-e-Kashmir plants and manages high-density apple orchards in the Kashmir valley for private clients. Model your orchard's 20-year returns with our calculator.">
+<meta name="theme-color" content="#F6F8F4">
+<link rel="canonical" href="https://meeraas-e-kashmir.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meeraas-e-Kashmir">
+<meta property="og:title" content="Meeraas-e-Kashmir · High-Density Apple Orchards">
+<meta property="og:description" content="High-density apple orchards in the Kashmir valley, planted and managed for you. See the 20-year returns for your budget.">
+<meta property="og:url" content="https://meeraas-e-kashmir.github.io/">
+<meta property="og:image" content="https://meeraas-e-kashmir.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Meeraas-e-Kashmir: an orchard is an inheritance. A valley in Kashmir.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@500&text=%D8%A7%D8%AB%D8%B1%D8%B4%D9%85%D9%90%DA%A9%DB%8C&display=swap">
+<style>
+[hidden]{display:none!important}
+img{max-width:100%}
+/* Layout: a light valley-morning hero (sky fading to a misty Pir Panjal ridge) holding a live one-kanal planting plan, then a light editorial column; the calculator is a two-pane workbench (inputs | results).
+   Deliberately one light look for every viewer, whatever their device theme. */
+:root{
+  --bg:#F6F8F4; --surface:#FFFFFF; --sunk:#ECF0E9; --ink:#1A2620; --muted:#5A675E; --line:#DCE3D8;
+  --apple:#A3172F; --apple-hover:#871226; --on-apple:#FFFFFF; --gold:#8A6A28; --leaf:#2F6B45; --leaf-soft:#A9CDB2; --loss:#A9465A;
+  --leaf-fill:rgba(47,107,69,.13); --loss-fill:rgba(169,70,90,.11);
+  --sky:#FFFFFF; --valley:#EDF3EE; --mist-far:#E4ECE9; --mist-near:#D9E5DC; --head-bg:rgba(255,255,255,.9);
+  --leaf-mid:#4F8A5E; --ground:#EEF3E7; --ground-row:#E2EBD8; --bark:#6B4E35; --post:#9A8468; --wire:#B5AC9C;
+  --f-display:"Newsreader","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-mono:ui-monospace,Menlo,Consolas,monospace;
+  --f-urdu:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Noto Naskh Arabic",serif;
+  --wrap:1160px;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--apple);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;margin:0;text-wrap:balance;letter-spacing:-.015em;font-optical-sizing:auto}
+p{margin:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font:600 .72rem/1.3 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.src{font:400 .78rem/1.45 var(--f-body);color:var(--muted)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:2px;font:600 .95rem/1 var(--f-body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s}
+.btn-apple{background:var(--apple);color:var(--on-apple);border-color:var(--apple)}
+.btn-apple:hover{background:var(--apple-hover);border-color:var(--apple-hover)}
+.btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-ink{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-ink:hover{background:var(--apple);border-color:var(--apple);color:var(--on-apple)}
+.btn-quiet{background:transparent;color:var(--muted);border-color:var(--line);padding:10px 14px;font-size:.85rem}
+.btn-quiet:hover{color:var(--ink);border-color:var(--ink)}
+
+/* Header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--head-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);color:var(--ink)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px}
+.mark{font:500 1.4rem/1 var(--f-display);letter-spacing:-.01em;text-decoration:none;color:var(--ink);white-space:nowrap}
+.mark em{color:var(--gold);padding-inline:.04em}
+.mark::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--apple);margin-left:3px;vertical-align:.15em}
+.nav{display:flex;gap:24px;font-size:.9rem}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.site-head .btn{padding:10px 16px;font-size:.85rem}
+@media (max-width:900px){.nav{display:none}}
+@media (max-width:480px){.mark{font-size:1.18rem}.site-head .btn{padding:9px 12px;font-size:.8rem}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky) 0%,var(--valley) 100%);color:var(--ink);padding-block:clamp(48px,7vw,96px) clamp(40px,5vw,64px)}
+.hero > .wrap{position:relative;z-index:1}
+.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:clamp(120px,18vw,220px);z-index:0;pointer-events:none}
+.ridge .far{fill:var(--mist-far)}
+.ridge .near{fill:var(--mist-near)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(36px,5vw,72px);align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(2.8rem,6.4vw,5.2rem);line-height:1.03;letter-spacing:-.025em;margin-top:18px}
+.hero h1 em{color:var(--apple)}
+.hero .lede{color:var(--muted);font-size:1.13rem;max-width:33em;margin-top:24px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.name-line{display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;margin-top:34px;color:var(--muted);font-size:.92rem}
+.urdu{font-family:var(--f-urdu);font-size:1.55rem;line-height:2.3;color:var(--gold)}
+
+.plan{border:1px solid var(--line);background:var(--surface);padding:clamp(16px,2.4vw,24px);box-shadow:0 1px 2px rgba(26,38,32,.04),0 12px 32px -12px rgba(26,38,32,.14)}
+.plan-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:600 .68rem/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.plan svg{display:block;width:100%;height:auto;margin-block:16px 16px;border-radius:2px}
+/* Orchard scene: three trellis rows of spindle apple trees, receding into the valley */
+#orchardSvg{--g:1}
+.sc-sky{fill:var(--surface)}
+.sc-hill{fill:var(--mist-far)}
+.sc-ground{fill:var(--ground)}
+.sc-alley{fill:var(--ground-row)}
+.sc-row1{opacity:.5}
+.sc-row2{opacity:.78}
+.post{fill:var(--post)}
+.wire{stroke:var(--wire);stroke-width:.8;fill:none}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transform:scale(var(--g));transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.shadow{fill:rgba(26,38,32,.09)}
+.trunk{fill:var(--bark)}
+.branch{stroke:var(--bark);stroke-width:1.5;stroke-linecap:round;fill:none}
+.lf1{fill:var(--leaf)} .lf2{fill:var(--leaf-mid)} .lf3{fill:var(--leaf-soft)}
+.ap{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.2);transition:opacity .5s ease,transform .6s cubic-bezier(.3,1.4,.5,1)}
+.ap.on{opacity:1;transform:scale(1)}
+.ap circle:first-child{fill:var(--apple)}
+.ap circle:last-child{fill:#fff;opacity:.55}
+.stages{display:flex;flex-wrap:wrap;gap:6px}
+.stages button{font:600 .8rem/1 var(--f-body);background:var(--surface);color:var(--muted);border:1px solid var(--line);padding:8px 11px;border-radius:2px;cursor:pointer}
+.stages button:hover{color:var(--ink);border-color:var(--muted)}
+.stages button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.plan-cap{margin-top:16px;display:grid;gap:2px}
+.plan-cap strong{font:500 1.45rem/1.2 var(--f-display)}
+.plan-cap span{color:var(--muted);font-size:.92rem}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 24px;margin:clamp(40px,6vw,64px) 0 0;padding:0;border-top:1px solid var(--ink)}
+.facts div{padding-top:18px}
+.facts dt{font:600 .68rem/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:8px 0 0;font:500 1.6rem/1.15 var(--f-display)}
+@media (max-width:620px){.facts{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}}
+
+/* Photography */
+.valley{margin:0;background:var(--valley)}
+.valley img{display:block;width:100%;height:clamp(240px,40vw,540px);object-fit:cover;object-position:50% 40%}
+.valley figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 24px;padding-block:12px}
+.cap{font:400 .78rem/1.45 var(--f-body);color:var(--muted)}
+.photos{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(16px,2.5vw,28px);margin-bottom:clamp(36px,5vw,56px)}
+@media (max-width:760px){.photos{grid-template-columns:1fr}}
+.photos figure{margin:0;display:grid;gap:10px;min-width:0}
+.photos img{display:block;width:100%;aspect-ratio:3/2;max-width:100%;object-fit:cover;border-radius:2px;background:var(--sunk)}
+.photos figcaption b{display:block;font:500 1.05rem/1.35 var(--f-display);color:var(--ink);margin-bottom:2px}
+.credits{font-size:.74rem;color:var(--muted);max-width:none}
+.credits a{color:var(--muted)}
+
+/* Sections */
+.block{padding-block:clamp(64px,9vw,112px);border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:16px;max-width:48rem;margin-bottom:clamp(32px,5vw,56px)}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.08}
+.sec-head p{color:var(--muted);font-size:1.08rem;max-width:40em}
+
+/* Why Kashmir figures */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:32px}
+.fig{border-top:1px solid var(--ink);padding-top:18px;display:grid;gap:10px;align-content:start}
+.fig .big{font:500 clamp(2.2rem,3.8vw,2.9rem)/1 var(--f-display);white-space:nowrap}
+.fig .big small{font-size:.5em;color:var(--muted);letter-spacing:0}
+.fig .big,.facts dd,.tile .v,.fee-line .what,.yr .kg,.plan-cap strong,.verdict,.compare td{font-variant-numeric:lining-nums}
+.fig p{color:var(--muted)}
+
+/* Comparison */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.compare{width:100%;min-width:640px;border-collapse:collapse}
+.compare th,.compare td{text-align:left;vertical-align:top;padding:16px 20px;border-bottom:1px solid var(--line)}
+.compare thead th{font:600 .7rem/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:0}
+.compare tbody th{font-weight:600;width:24%;padding-left:0}
+.compare thead th:first-child{padding-left:0}
+.compare .hd{background:var(--surface)}
+.compare thead .hd{color:var(--apple);border-top:2px solid var(--apple);padding-top:14px}
+.compare td{color:var(--muted)}
+.compare td.hd{color:var(--ink)}
+
+/* Timeline */
+.timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.yr{display:grid;grid-template-rows:auto 150px auto 1fr;gap:12px;min-width:0}
+.yr h3{font:600 .72rem/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.track{display:flex;align-items:flex-end;border-bottom:1px solid var(--ink)}
+.bar{width:46px;height:calc(var(--p) * 1%);min-height:2px;background:var(--apple)}
+.yr .kg{font:500 1.35rem/1.2 var(--f-display)}
+.yr .kg small{display:block;font:400 .82rem/1.4 var(--f-body);color:var(--muted)}
+.yr p{color:var(--muted);font-size:.93rem}
+@media (max-width:820px){
+  .timeline{grid-template-columns:1fr;gap:28px}
+  .yr{grid-template-rows:none;grid-template-columns:minmax(0,1fr)}
+  .track{height:12px;border-bottom:0;background:var(--sunk);align-items:stretch}
+  .bar{height:auto;width:calc(var(--p) * 1%)}
+}
+
+/* Calculator */
+.calc{display:grid;grid-template-columns:minmax(0,370px) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:960px){.calc{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);padding:clamp(18px,2.4vw,26px);display:grid;gap:24px;min-width:0}
+.panel-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.panel-title h3{font-size:1.5rem}
+.field{display:grid;gap:9px;min-width:0}
+.field-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.field-top label,.field legend,.lab{font-weight:600;font-size:.92rem}
+.field legend{padding:0;margin-bottom:9px}
+.field output{font:600 .95rem/1 var(--f-body);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hint{font-size:.8rem;color:var(--muted);line-height:1.45}
+input[type=range]{width:100%;margin:0;accent-color:var(--apple)}
+.box-in{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg);border-radius:2px;min-width:0}
+.box-in:focus-within{border-color:var(--ink)}
+.box-in span{padding-inline:10px 2px;color:var(--muted);font-size:.9rem;white-space:nowrap}
+.box-in input{flex:1;min-width:0;width:100%;border:0;background:transparent;padding:10px;font:500 1rem/1.2 var(--f-body);color:var(--ink);font-variant-numeric:tabular-nums}
+.box-in input:focus{outline:none}
+.kanal-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center}
+.seg{position:relative;display:flex;gap:3px;padding:3px;border:1px solid var(--line);background:var(--bg);border-radius:2px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{flex:1;min-width:0;text-align:center;padding:8px 4px;font-size:.85rem;line-height:1.25;cursor:pointer;border-radius:1px;color:var(--muted)}
+.seg label small{display:block;font:400 .74rem/1.3 var(--f-body);opacity:.85}
+.seg label:hover{color:var(--ink)}
+.seg input:checked + label{background:var(--ink);color:var(--bg)}
+.seg input:focus-visible + label{outline:2px solid var(--apple);outline-offset:1px}
+.adv{border-top:1px solid var(--line);padding-top:18px}
+.adv summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.adv summary::-webkit-details-marker{display:none}
+.adv summary::after{content:"+";font:300 1.4rem/1 var(--f-body);color:var(--muted)}
+.adv[open] summary::after{content:"−"}
+.adv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;margin-top:18px}
+.adv-grid .field{gap:6px}
+.adv-grid label{font-size:.8rem;font-weight:500;color:var(--muted)}
+.adv-grid .box-in input{padding:8px;font-size:.92rem}
+.terms{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:8px}
+.terms dl{margin:0;display:grid;gap:6px}
+.terms dl div{display:flex;justify-content:space-between;gap:12px;font-size:.88rem}
+.terms dt{color:var(--muted)}
+.terms dd{margin:0;font-weight:600;text-align:right}
+
+.results{display:grid;gap:26px;min-width:0}
+.verdict{font:400 clamp(1.3rem,2.3vw,1.7rem)/1.4 var(--f-display);max-width:34em}
+.verdict b{font-weight:600;color:var(--apple)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
+.tile{padding:18px;display:grid;gap:6px;align-content:start;min-width:0}
+.tile + .tile{border-left:1px solid var(--line)}
+.tile .k{font:600 .66rem/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font:500 clamp(1.5rem,2.5vw,2rem)/1.1 var(--f-display);font-variant-numeric:lining-nums tabular-nums;overflow-wrap:anywhere}
+.tile .s{font-size:.8rem;color:var(--muted);line-height:1.4}
+@media (max-width:680px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile:nth-child(3){border-left:0}
+  .tile:nth-child(n+3){border-top:1px solid var(--line)}
+}
+.minor{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 24px;margin:0}
+.minor div{border-top:1px solid var(--line);padding-top:10px;min-width:0}
+.minor dt{font-size:.8rem;color:var(--muted)}
+.minor dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+@media (max-width:680px){.minor{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.chart-box{background:var(--surface);border:1px solid var(--line);padding:18px 18px 10px;min-width:0}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px;margin-bottom:8px}
+.chart-head h3{font:600 .95rem/1.3 var(--f-body)}
+.readout{font:400 .84rem/1.4 var(--f-body);color:var(--muted);font-variant-numeric:tabular-nums}
+#chart{min-width:0}
+#chart svg{display:block;max-width:100%;touch-action:pan-y}
+.ax text{fill:var(--muted);font:400 11.5px var(--f-body);font-variant-numeric:tabular-nums}
+.ax line{stroke:var(--line);stroke-width:1}
+.zero{stroke:var(--ink);stroke-width:1}
+.area-pos{fill:var(--leaf-fill)}
+.area-neg{fill:var(--loss-fill)}
+.cum-line{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.pb-dot{fill:var(--apple);stroke:var(--surface);stroke-width:2}
+.pb-label{fill:var(--apple);font:600 12px var(--f-body)}
+.guide{stroke:var(--muted);stroke-dasharray:3 3}
+.hover-dot{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.78rem;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:12px;height:12px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+
+.cf{border-top:1px solid var(--line);padding-top:16px}
+.cf summary{cursor:pointer;font-weight:600;font-size:.95rem}
+.cf .tbl-wrap{margin-top:14px;border:1px solid var(--line);background:var(--surface)}
+.cft{width:100%;min-width:760px;border-collapse:collapse;font-size:.84rem;font-variant-numeric:tabular-nums}
+.cft th,.cft td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.cft thead th{font:600 .66rem/1.3 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+.cft th:first-child,.cft td:first-child{text-align:left}
+.cft tbody th{font-weight:600}
+.cft .neg{color:var(--loss)}
+
+.share{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.share .status{font-size:.85rem;color:var(--muted)}
+.fallback{width:100%;min-height:150px;font:400 .82rem/1.5 var(--f-mono);padding:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+
+/* Fees */
+.fees{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px)}
+@media (max-width:860px){.fees{grid-template-columns:1fr}}
+.fee-lines{display:grid;gap:0;border-top:1px solid var(--ink)}
+.fee-line{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr);gap:20px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fee-line .when{font:600 .72rem/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding-top:6px}
+.fee-line .what{font:500 1.6rem/1.2 var(--f-display)}
+.fee-line p{color:var(--muted);margin-top:6px}
+.aligned{margin-top:24px;font-size:1.05rem;max-width:34em}
+.costs{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.costs caption{text-align:left;font-weight:600;padding-bottom:12px}
+.costs th,.costs td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.costs td{text-align:right;white-space:nowrap;padding-left:16px}
+.costs th span{display:block;font-weight:400;font-size:.82rem;color:var(--muted)}
+.costs th{font-weight:500}
+
+/* Evidence */
+.evidence{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,64px)}
+@media (max-width:860px){.evidence{grid-template-columns:1fr}}
+.ev-col h3{font:600 .95rem/1.3 var(--f-body);display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.ev-col h3 i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.ev-list{list-style:none;margin:0;padding:0}
+.ev-list li{padding-block:16px;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.ev-list b{font-weight:600}
+.ev-list p{color:var(--muted)}
+.reading{margin-top:clamp(36px,5vw,56px);background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);padding:clamp(20px,3vw,32px);display:grid;gap:14px;max-width:52rem}
+.reading h3{font-size:1.5rem}
+.reading p{color:var(--muted)}
+.reading p strong{color:var(--ink);font-weight:600}
+
+/* FAQ */
+.faq{max-width:52rem;border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding-block:20px;font:500 1.2rem/1.35 var(--f-display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:300 1.5rem/1.1 var(--f-body);color:var(--muted);flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{color:var(--muted);padding-bottom:22px;max-width:42em}
+
+/* Closing band */
+.closing{background:var(--valley);color:var(--ink);border-top:1px solid var(--line);padding-block:clamp(56px,8vw,96px) clamp(32px,4vw,48px)}
+.closing-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:32px;align-items:end}
+@media (max-width:860px){.closing-grid{grid-template-columns:1fr}}
+.closing h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1}
+.closing p{color:var(--muted);margin-top:16px;max-width:34em}
+.closing .status{color:var(--muted);font-size:.85rem}
+.closing .share{justify-content:flex-start}
+.fine{border-top:1px solid var(--line);margin-top:clamp(40px,6vw,64px);padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:.8rem;color:var(--muted)}
+.fine p{max-width:60em}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Meeraas-e-Kashmir, back to top">Meeraas<em>-e-</em>Kashmir</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#kashmir">Kashmir</a>
+      <a href="#orchard">The orchard</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#fees">Fees</a>
+      <a href="#evidence">Price evidence</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn btn-apple" href="#calculator">Estimate returns</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <svg class="ridge" id="ridge" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Kashmir valley · High-density apple orchards</p>
+          <h1>An orchard is an <em>inheritance.</em></h1>
+          <p class="lede">Meeraas-e-Kashmir plants and runs modern high-density apple orchards in Kashmir for private clients. You fund the orchard and receive the harvest proceeds. We manage it through the year, sell the fruit, and are paid mainly from a share of what it sells for.</p>
+          <div class="cta-row">
+            <a class="btn btn-apple" href="#calculator">Model your orchard</a>
+            <a class="btn btn-ghost" href="#evidence">See the price evidence</a>
+          </div>
+          <p class="name-line"><span class="urdu" lang="ur" dir="rtl">میراثِ کشمیر</span><span><em>Meeraas-e-Kashmir</em>: the inheritance of Kashmir, what one generation leaves the next.</span></p>
+        </div>
+
+        <figure class="plan" aria-labelledby="planCap" style="margin:0">
+          <div class="plan-head"><span>Your orchard, year by year</span><span>1 kanal · 180 trees</span></div>
+          <svg id="orchardSvg" viewBox="0 64 560 256" role="img" aria-label="Illustration of high-density apple trees on trellis rows. The trees grow and carry more apples as you step from Year 1 to Year 5."></svg>
+          <div class="stages" role="group" aria-label="Show orchard by year">
+            <button type="button" data-stage="0">Y1</button>
+            <button type="button" data-stage="1">Y2</button>
+            <button type="button" data-stage="2">Y3</button>
+            <button type="button" data-stage="3">Y4</button>
+            <button type="button" data-stage="4">Y5+</button>
+          </div>
+          <figcaption class="plan-cap" id="planCap" aria-live="polite"><strong>Year 5 onward · Full bearing</strong><span>20 kg a tree · 3,600 kg from one kanal</span></figcaption>
+        </figure>
+      </div>
+
+      <dl class="facts">
+        <div><dt>First harvest</dt><dd>Year 2</dd></div>
+        <div><dt>Full yield</dt><dd>Year 5</dd></div>
+        <div><dt>Trees per kanal</dt><dd>180</dd></div>
+        <div><dt>Our commission</dt><dd>15% of sales</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <figure class="valley">
+    <img src="img/pahalgam.jpg" width="1920" height="1071" alt="The Lidder valley near Pahalgam: pine-covered slopes and a river running toward snow-capped peaks under a blue sky.">
+    <figcaption class="wrap"><span class="cap">The Lidder valley near Pahalgam, south Kashmir</span><span class="cap">Photo: KennyOMG, CC BY-SA 3.0</span></figcaption>
+  </figure>
+
+  <section class="block" id="kashmir">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Why Kashmir, why now</p>
+        <h2>Kashmir grows most of India's apples. India still runs short.</h2>
+        <p>Long, cold valley winters give apple trees the chill they need to flower evenly, and cool nights before harvest build colour and crunch. The country eats more apples than it grows, imports make up the gap at a protected floor price, and almost none of the valley has moved to modern planting yet.</p>
+      </div>
+      <div class="figs">
+        <div class="fig">
+          <span class="big num">25–26<small> lakh t</small></span>
+          <p>India's yearly apple demand, against 20–21 lakh tonnes grown at home.</p>
+          <span class="src">Commerce Minister, Feb 2026</span>
+        </div>
+        <div class="fig">
+          <span class="big num">5.58<small> lakh t</small></span>
+          <p>Apples imported in FY2025, about 22% of domestic production.</p>
+          <span class="src">FreshPlaza, Feb 2026</span>
+        </div>
+        <div class="fig">
+          <span class="big num">₹80<small>/kg</small></span>
+          <p>Minimum import price since June 2025, up from ₹50. With 50% duty the landed floor is about ₹120/kg.</p>
+          <span class="src">Tribune India</span>
+        </div>
+        <div class="fig">
+          <span class="big num">~1%</span>
+          <p>Share of Kashmir's apple area under high-density planting today.</p>
+          <span class="src">JKPICCA, Aug 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="orchard">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The orchard</p>
+        <h2>Two ways to grow a Kashmir apple</h2>
+        <p>Most of the valley still grows tall trees on seedling rootstock. A high-density orchard uses compact trees on dwarfing rootstock, trained on a trellis with drip irrigation. It fruits years earlier and fetches a higher price at the orchard gate.</p>
+      </div>
+      <div class="photos">
+        <figure>
+          <img src="img/orchard-aragam.jpg" width="1280" height="848" loading="lazy" alt="A traditional apple orchard in early spring: tall, widely spaced bare trees on green grass, with forested mountains and snow peaks behind.">
+          <figcaption><b>A traditional valley orchard in early spring</b><span class="cap">Aragam, Bandipora district · Photo: Revoshots, CC BY-SA 4.0</span></figcaption>
+        </figure>
+        <figure>
+          <img src="img/apple-garden.jpg" width="1280" height="853" loading="lazy" alt="Close view of a Kashmir apple tree heavy with ripening apples among green leaves.">
+          <figcaption><b>Fruit ripening before the September harvest</b><span class="cap">Kashmir · Photo: Auli Raha, CC BY-SA 4.0</span></figcaption>
+        </figure>
+      </div>
+      <div class="tbl-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Traditional orchard</th><th scope="col" class="hd">Meeraas high-density</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Trees</th><td>Tall trees on seedling rootstock, widely spaced</td><td class="hd">Compact trees on dwarfing rootstock, 180 per kanal on a trellis</td></tr>
+            <tr><th scope="row">First commercial crop</th><td>Typically year 6–8</td><td class="hd">Year 2</td></tr>
+            <tr><th scope="row">Full bearing</th><td>Typically year 10–12</td><td class="hd">Year 5, at 20 kg a tree in our model</td></tr>
+            <tr><th scope="row">Farmgate price, 2026</th><td>About ₹50/kg</td><td class="hd">₹100–140/kg <span class="src">· Khushal e Kashmir</span></td></tr>
+            <tr><th scope="row">Share of valley apple area</th><td>About 99%</td><td class="hd">About 1% <span class="src">· JKPICCA, Aug 2026</span></td></tr>
+            <tr><th scope="row">Picking and spraying</th><td>Ladders, a tall uneven canopy</td><td class="hd">Done from the ground, with even light and spray cover</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sec-head" style="margin-top:clamp(56px,8vw,96px)">
+        <p class="eyebrow">Yield by year</p>
+        <h2>The first five years</h2>
+        <p>The yields below are the ones our financial model uses, per tree and per kanal. From Year 5 the model holds yield flat at 20 kg a tree through Year 20.</p>
+      </div>
+      <div class="timeline">
+        <div class="yr"><h3>Year 1</h3><div class="track"><div class="bar" style="--p:0"></div></div><div class="kg num">0 kg<small>No crop</small></div><p>Land is prepared, trellis and borewell go in, and saplings are planted.</p></div>
+        <div class="yr"><h3>Year 2</h3><div class="track"><div class="bar" style="--p:25"></div></div><div class="kg num">5 kg a tree<small>900 kg a kanal</small></div><p>A first, light crop while the trees build their frame.</p></div>
+        <div class="yr"><h3>Year 3</h3><div class="track"><div class="bar" style="--p:85"></div></div><div class="kg num">17 kg a tree<small>3,060 kg a kanal</small></div><p>Commercial cropping begins.</p></div>
+        <div class="yr"><h3>Year 4</h3><div class="track"><div class="bar" style="--p:85"></div></div><div class="kg num">17 kg a tree<small>3,060 kg a kanal</small></div><p>The canopy fills its space on the trellis.</p></div>
+        <div class="yr"><h3>Year 5 onward</h3><div class="track"><div class="bar" style="--p:100"></div></div><div class="kg num">20 kg a tree<small>3,600 kg a kanal</small></div><p>Full bearing, held flat in the model to Year 20.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="calculator">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Returns calculator</p>
+        <h2>Model your orchard</h2>
+        <p>This is the same 20-year cashflow model our team works from, calculated per kanal and scaled to your holding. It opens on our base case for a ₹50 lakh budget. Change anything and the result updates.</p>
+      </div>
+
+      <div class="calc">
+        <form class="panel" id="calcForm" autocomplete="off">
+          <div class="panel-title"><h3>Your orchard</h3><button type="button" class="btn btn-quiet" id="resetBtn">Reset</button></div>
+
+          <div class="field">
+            <div class="field-top"><label for="budget">Your budget</label></div>
+            <div class="box-in"><span>₹</span><input type="number" id="budget" min="0" step="100000" inputmode="numeric" value="5000000"></div>
+            <p class="hint" id="budgetHint">₹50 L covers 15 kanals at ₹3,23,000 each in Year 1.</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top"><label for="kanals">Kanals</label><output id="areaOut" for="kanals">≈ 1.9 acres</output></div>
+            <div class="kanal-row">
+              <div class="box-in"><input type="number" id="kanals" min="1" max="5000" step="1" inputmode="numeric" value="15"></div>
+              <input type="range" id="kanalsRange" min="1" max="200" step="1" value="15" aria-label="Kanals">
+            </div>
+            <p class="hint">Set by your budget, or choose directly. 1 kanal = 5,500 sq ft and 180 trees; about 8 kanals make an acre.</p>
+          </div>
+
+          <fieldset class="field">
+            <legend>Time horizon</legend>
+            <div class="seg">
+              <input type="radio" name="horizon" id="h10" value="10"><label for="h10">10 years</label>
+              <input type="radio" name="horizon" id="h15" value="15"><label for="h15">15 years</label>
+              <input type="radio" name="horizon" id="h20" value="20" checked><label for="h20">20 years</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Price scenario</legend>
+            <div class="seg">
+              <input type="radio" name="scenario" id="scBase" value="base" checked><label for="scBase">Base<small>₹80 +3%</small></label>
+              <input type="radio" name="scenario" id="scCons" value="cons"><label for="scCons">Cautious<small>₹70 flat</small></label>
+              <input type="radio" name="scenario" id="scStress" value="stress"><label for="scStress">Stress<small>₹50 flat</small></label>
+              <input type="radio" name="scenario" id="scCustom" value="custom"><label for="scCustom">Custom<small>your own</small></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <div class="field-top"><label for="price">Farmgate price, Year 1</label><output id="priceOut" for="price">₹80/kg</output></div>
+            <input type="range" id="price" min="30" max="160" step="1" value="80">
+            <p class="hint">Net price for loose fruit at the orchard. Kashmir Gala sold for ₹100–150/kg in Aug 2026.</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top"><label for="growth">Price change each year</label><output id="growthOut" for="growth">+3.0%</output></div>
+            <input type="range" id="growth" min="-4" max="6" step="0.5" value="3">
+          </div>
+
+          <div class="field">
+            <div class="field-top"><label for="yield">Yield per mature tree</label><output id="yieldOut" for="yield">20 kg</output></div>
+            <input type="range" id="yield" min="8" max="30" step="1" value="20">
+            <p class="hint">Years 1–4 scale with this: 0, 5, 17 and 17 kg at the 20 kg base.</p>
+          </div>
+
+          <details class="adv" id="advBox">
+            <summary>Cost assumptions, per kanal</summary>
+            <div class="adv-grid">
+              <div class="field"><label for="estab">Orchard establishment</label><div class="box-in"><span>₹</span><input type="number" id="estab" min="0" step="1000" inputmode="numeric"></div></div>
+              <div class="field"><label for="dev">Orchard development</label><div class="box-in"><span>₹</span><input type="number" id="dev" min="0" step="1000" inputmode="numeric"></div></div>
+              <div class="field"><label for="bore">Borewell</label><div class="box-in"><span>₹</span><input type="number" id="bore" min="0" step="1000" inputmode="numeric"></div></div>
+              <div class="field"><label for="hail">Anti-hail net</label><div class="box-in"><span>₹</span><input type="number" id="hail" min="0" step="1000" inputmode="numeric"></div></div>
+              <div class="field"><label for="hailYear">Net replaced in year</label><div class="box-in"><span>Y</span><input type="number" id="hailYear" min="2" max="20" step="1" inputmode="numeric"></div></div>
+              <div class="field"><label for="mgmt">Orchard management / yr</label><div class="box-in"><span>₹</span><input type="number" id="mgmt" min="0" step="1000" inputmode="numeric"></div></div>
+              <div class="field"><label for="lease">Land lease, Year 1</label><div class="box-in"><span>₹</span><input type="number" id="lease" min="0" step="500" inputmode="numeric"></div></div>
+              <div class="field"><label for="leaseEsc">Lease rise every 2 yrs</label><div class="box-in"><span>%</span><input type="number" id="leaseEsc" min="0" max="50" step="1" inputmode="decimal"></div></div>
+              <div class="field"><label for="varKg">Variable cost per kg</label><div class="box-in"><span>₹</span><input type="number" id="varKg" min="0" step="1" inputmode="decimal"></div></div>
+              <div class="field"><label for="infl">Cost inflation / yr</label><div class="box-in"><span>%</span><input type="number" id="infl" min="0" max="25" step="0.5" inputmode="decimal"></div></div>
+              <div class="field"><label for="disc">Hurdle rate for NPV</label><div class="box-in"><span>%</span><input type="number" id="disc" min="0" max="40" step="0.5" inputmode="decimal"></div></div>
+            </div>
+            <p class="hint" style="margin-top:14px">Own land in the valley? Set the lease to 0. The base model has no hail netting; add its cost here to see the effect.</p>
+          </details>
+
+          <div class="terms">
+            <span class="lab">Meeraas terms</span>
+            <dl>
+              <div><dt>Fixed fee, Years 1–2</dt><dd>₹15,000 / kanal / yr</dd></div>
+              <div><dt>Sales commission</dt><dd>15% of sale proceeds</dd></div>
+            </dl>
+            <p class="hint">The fixed fee rises with cost inflation and stops after Year 2.</p>
+          </div>
+        </form>
+
+        <div class="results" aria-live="polite">
+          <p class="verdict" id="verdict">On 10 kanals over 20 years, the model returns <b>₹3.92 Cr</b> after all costs and our fees.</p>
+
+          <div class="tiles">
+            <div class="tile"><span class="k">Year-1 investment</span><span class="v" id="tInvest">₹32.3 L</span><span class="s" id="tInvestS">₹3,23,000 per kanal</span></div>
+            <div class="tile"><span class="k">Payback</span><span class="v" id="tPayback">Year 5</span><span class="s">When your cumulative cash turns positive</span></div>
+            <div class="tile"><span class="k">IRR</span><span class="v" id="tIrr">41.3%</span><span class="s" id="tIrrS">Over 20 years, before tax</span></div>
+            <div class="tile"><span class="k">Income in Year 10</span><span class="v" id="tY10">₹23.4 L</span><span class="s">Net to you, at full bearing</span></div>
+          </div>
+
+          <dl class="minor">
+            <div><dt id="mTotalK">Total net over 20 years</dt><dd id="mTotal">₹3.92 Cr</dd></div>
+            <div><dt id="mNpvK">Value today at 12%</dt><dd id="mNpv">₹96.4 L</dd></div>
+            <div><dt>Most cash tied up</dt><dd id="mPeak">₹33.1 L</dd></div>
+            <div><dt id="mFeeK">Paid to Meeraas, 20 years</dt><dd id="mFee">₹1.10 Cr</dd></div>
+          </dl>
+
+          <div class="chart-box">
+            <div class="chart-head"><h3>Your cumulative cash position</h3><span class="readout" id="readout">Hover or tap the chart for any year</span></div>
+            <div id="chart"></div>
+            <div class="legend"><span><i style="background:var(--loss-fill)"></i>Money still in the orchard</span><span><i style="background:var(--leaf-fill)"></i>Paid back, now in profit</span></div>
+          </div>
+
+          <details class="cf">
+            <summary id="cfSummary">Year-by-year cashflow for your holding</summary>
+            <div class="tbl-wrap">
+              <table class="cft">
+                <thead><tr><th scope="col">Year</th><th scope="col">Harvest (kg)</th><th scope="col">Price ₹/kg</th><th scope="col">Sales</th><th scope="col">Orchard costs</th><th scope="col">Meeraas fee</th><th scope="col">Net to you</th><th scope="col">Cumulative</th></tr></thead>
+                <tbody id="cfBody"></tbody>
+              </table>
+            </div>
+          </details>
+
+          <div class="share">
+            <button type="button" class="btn btn-ink" data-copy>Copy my estimate</button>
+            <span class="status" data-copy-status>Paste it into a message to your Meeraas advisor.</span>
+          </div>
+          <textarea class="fallback" data-fallback hidden readonly aria-label="Your estimate as text"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="fees">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">How Meeraas is paid</p>
+        <h2>We earn when your fruit sells well</h2>
+        <p>Every rupee you pay us is a line in the calculator above. There are two parts, and the fixed part ends after Year 2.</p>
+      </div>
+      <div class="fees">
+        <div>
+          <div class="fee-lines">
+            <div class="fee-line"><span class="when">Years 1–2</span><div><span class="what num">₹15,000 per kanal a year</span><p>A fixed fee while the orchard is planted and brought into bearing. It rises with cost inflation, then stops.</p></div></div>
+            <div class="fee-line"><span class="when">Every harvest</span><div><span class="what num">15% of sale proceeds</span><p>Our commission for running the orchard and selling your fruit. It is taken only from money the harvest brings in.</p></div></div>
+          </div>
+          <p class="aligned">From Year 3 our income moves with yours. A better price or a heavier crop raises both, and a poor season lowers both.</p>
+        </div>
+        <table class="costs">
+          <caption>What your investment pays for, per kanal</caption>
+          <tbody>
+            <tr><th scope="row">Orchard establishment<span>Plants, trellis and planting, Year 1</span></th><td class="num">₹1,80,000</td></tr>
+            <tr><th scope="row">Orchard development<span>Year 1</span></th><td class="num">₹60,000</td></tr>
+            <tr><th scope="row">Borewell<span>Year 1</span></th><td class="num">₹15,000</td></tr>
+            <tr><th scope="row">Orchard management<span>Each year, rising 6% a year</span></th><td class="num">₹35,000</td></tr>
+            <tr><th scope="row">Land lease<span>Year 1, rising 10% every two years</span></th><td class="num">₹18,000</td></tr>
+            <tr><th scope="row">Anti-hail net<span>Optional, not in the base model</span></th><td class="num">Add in calculator</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="evidence">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The price question</p>
+        <h2>Price drives the answer, so here is the evidence</h2>
+        <p>The farmgate price matters more than any other number in the model. These are the sources we checked in August and September 2026, on both sides.</p>
+      </div>
+      <div class="evidence">
+        <div class="ev-col">
+          <h3><i style="background:var(--leaf)"></i>What supports ₹70–80/kg</h3>
+          <ul class="ev-list">
+            <li><b>Kashmir Gala sells for ₹100–150/kg at the orchard gate.</b><span class="src">Kashmir News Observer / Greater Kashmir, Jul–Aug 2026</span></li>
+            <li><b>High-density fruit fetches ₹100–140/kg against ₹50/kg for traditional.</b><span class="src">Khushal e Kashmir</span></li>
+            <li><b>India is in structural deficit.</b><p>Demand of 25–26 lakh tonnes against 20–21 lakh tonnes of production.</p><span class="src">Commerce Minister, Feb 2026</span></li>
+            <li><b>Imports fill the gap.</b><p>About 5.58 lakh tonnes in FY2025, roughly 22% of production.</p><span class="src">FreshPlaza, Feb 2026</span></li>
+            <li><b>The import floor went up.</b><p>Minimum import price raised from ₹50 to ₹80/kg in June 2025. With 50% duty the landed floor is about ₹120/kg.</p><span class="src">Tribune India</span></li>
+            <li><b>The EU trade quota is small.</b><p>50,000 tonnes at 20% duty with an ₹80 minimum price, landing near ₹96/kg, rising to 1,00,000 tonnes over 10 years.</p><span class="src">Fruitnet, Mar 2026</span></li>
+            <li><b>Supply grows slowly.</b><p>About 1% of Kashmir's apple area is high-density, and Himachal yields 7–8 t/ha against 40–70 t/ha in leading countries.</p><span class="src">JKPICCA, Aug 2026 · FreshPlaza</span></li>
+          </ul>
+        </div>
+        <div class="ev-col">
+          <h3><i style="background:var(--loss)"></i>What could pull it down</h3>
+          <ul class="ev-list">
+            <li><b>A wave of new Gala planting.</b><p>J&amp;K targets 5,500 ha in five years at a 50% subsidy, and about 4,000 ha a year is already going in under high- and medium-density schemes.</p><span class="src">NITI Aayog roadmap / J&amp;K Budget 2026–27</span></li>
+            <li><b>Today's premium is a scarcity premium.</b><p>₹100–150/kg exists because high-density is 1% of the area. New Gala blocks bear from Year 2.</p><span class="src">Meeraas analysis</span></li>
+            <li><b>Import floors are not always enforced.</b><p>Iranian and Turkish apples landed at ₹41 and ₹58/kg in 2023–24 despite the ₹50 minimum.</p><span class="src">HP Samyukt Kisan Manch</span></li>
+            <li><b>Trade deals are opening up.</b><p>A US quota is agreed, and an April–August duty-cut window is under discussion.</p><span class="src">Business Today, Feb 2026</span></li>
+            <li><b>Weather and roads.</b><p>Repeated hailstorms across south Kashmir in July–August 2026, and NH-44 closures at peak harvest.</p><span class="src">Greater Kashmir</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reading">
+        <p class="eyebrow">How we read it</p>
+        <h3>We plan below today's price, and we spread the risk</h3>
+        <p>Our base case of <strong>₹80/kg</strong> sits well under the ₹100–150/kg farmgate range, and the cautious case of <strong>₹70/kg</strong> is about 40% under it. The bigger risk is the Gala premium shrinking as high-density planting grows from 1% toward 10% of the valley's apple area.</p>
+        <p>That is why we recommend mixing varieties in every block, with <strong>Fuji, Red Velox, Jeromine and Scarlet Spur</strong> alongside Gala. To see the downside, pick the Stress scenario: at ₹50/kg with no price growth, the model still pays back in <strong>Year 7</strong>, though margins get thin late in the 20 years as costs keep rising.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Questions</p>
+        <h2>What clients ask us first</h2>
+      </div>
+      <div class="faq">
+        <details><summary>What is a kanal?</summary><p>A land unit used in Jammu &amp; Kashmir. Our model uses 5,500 sq ft per kanal, so about 8 kanals make an acre. Each kanal holds 180 trees.</p></details>
+        <details><summary>Do I need to buy land?</summary><p>No. The model assumes leased land at ₹18,000 per kanal in Year 1, rising 10% every two years. If you already own land in the valley, open the cost assumptions in the calculator and set the lease to zero.</p></details>
+        <details><summary>When does the orchard start paying?</summary><p>The first light crop comes in Year 2 and the orchard reaches full bearing in Year 5. In the base case your cumulative cash position turns positive in Year 5.</p></details>
+        <details><summary>Are these returns guaranteed?</summary><p>No. They are projections. The result depends most on the price your fruit sells for, then on yield and weather. Use the calculator to test a ₹50/kg stress case, lower the yield, or add the cost of hail netting.</p></details>
+        <details><summary>Who sells the fruit?</summary><p>We do. Our 15% commission comes out of the sale proceeds, so we earn more only when your fruit sells for more.</p></details>
+        <details><summary>What happens in a hail year?</summary><p>Hailstorms hit south Kashmir repeatedly in July and August 2026. Anti-hail netting protects the crop but is not in the base model. Enter its cost per kanal in the calculator: the model charges it in Year 1 and again in the replacement year you choose, Year 12 by default.</p></details>
+        <details><summary>Why Gala, and why mix varieties?</summary><p>Gala on dwarfing rootstock fruits in its second year and currently earns a premium at the farmgate. Because many new orchards are planting Gala, we recommend mixing in Fuji, Red Velox, Jeromine and Scarlet Spur so your harvest does not depend on one variety's price.</p></details>
+        <details><summary>How are IRR and NPV worked out?</summary><p>Both use the year-by-year net cashflow shown in the calculator, with the Year-1 investment as the first year's outflow. IRR is the yearly return at which those cashflows balance to zero. NPV discounts each year at your hurdle rate, 12% by default. Figures are before tax and assume no sale value for the orchard at the end of the period.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <div class="closing-grid">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2>Send us your numbers</h2>
+          <p>Copy your estimate and send it to the Meeraas advisor who shared this page. They can take you through land options, planting and the management agreement.</p>
+        </div>
+        <div class="share">
+          <button type="button" class="btn btn-apple" data-copy>Copy my estimate</button>
+          <span class="status" data-copy-status></span>
+          <textarea class="fallback" data-fallback hidden readonly aria-label="Your estimate as text"></textarea>
+        </div>
+      </div>
+      <div class="fine">
+        <p>All figures are in Indian rupees, before tax, from the Meeraas orchard model with market evidence gathered in August–September 2026. Projections are illustrative and are not a promise of returns. Current prices do not guarantee future prices.</p>
+        <p>© 2026 Meeraas-e-Kashmir</p>
+        <p class="credits">Photographs of the Kashmir valley are by other photographers and do not show Meeraas orchards. They are used under Creative Commons licences via Wikimedia Commons:
+          <a href="https://commons.wikimedia.org/wiki/File:Pahalgam_Valley.jpg" target="_blank" rel="noopener">Pahalgam Valley</a> by KennyOMG (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>);
+          <a href="https://commons.wikimedia.org/wiki/File:Apple_Orchard_in_Aragam.jpg" target="_blank" rel="noopener">Apple Orchard in Aragam</a> by Revoshots (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>);
+          <a href="https://commons.wikimedia.org/wiki/File:Apple_Garden_in_Kashmir,_India.jpg" target="_blank" rel="noopener">Apple Garden in Kashmir, India</a> by Auli Raha (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>). Images resized and cropped for this page.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Model inputs (from the Meeraas sheet: Assumptions + Model tabs) ---------- */
+  var TREES = 180, SQFT = 5500, CURVE = [0, 5, 17, 17];             // kg per tree, Years 1–4 at a 20 kg mature yield
+  var TERMS = { fee: 15000, feeYears: 2, comm: 0.15 };                // Meeraas terms
+  var DEF = { budget: 5000000, kanals: 15, horizon: 20, price: 80, growth: 3, yield: 20,
+              estab: 180000, dev: 60000, bore: 15000, hail: 0, hailYear: 12,
+              mgmt: 35000, varKg: 0, lease: 18000, leaseEsc: 10, infl: 6, disc: 12 };
+  var PRESETS = { base: { price: 80, growth: 3 }, cons: { price: 70, growth: 0 }, stress: { price: 50, growth: 0 } };
+  var COST_IDS = ["estab", "dev", "bore", "hail", "hailYear", "mgmt", "lease", "leaseEsc", "varKg", "infl", "disc"];
+  var KEY = "meeraas-calc-v2";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = Object.assign({}, DEF);
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+    if (saved && typeof saved === "object") {
+      Object.keys(DEF).forEach(function (k) { if (typeof saved[k] === "number" && isFinite(saved[k])) state[k] = saved[k]; });
+    }
+  } catch (e) {}
+
+  /* ---------- Formatting ---------- */
+  var inr = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
+  function rs(v) { return (v < -0.5 ? "−" : "") + "₹" + inr.format(Math.round(Math.abs(v))); }
+  function trim(s) { return s.indexOf(".") > -1 ? s.replace(/0+$/, "").replace(/\.$/, "") : s; }
+  function rsc(v) {
+    var a = Math.abs(v), s = v < -0.5 ? "−" : "";
+    if (a >= 1e7) return s + "₹" + trim((a / 1e7).toFixed(a >= 1e9 ? 1 : 2)) + " Cr";
+    if (a >= 1e5) return s + "₹" + trim((a / 1e5).toFixed(a >= 1e6 ? 1 : 2)) + " L";
+    return s + "₹" + inr.format(Math.round(a));
+  }
+  function pct(v, d) { return (v * 100).toFixed(d == null ? 1 : d) + "%"; }
+  function acres(k) { var a = k * SQFT / 43560; return a < 10 ? a.toFixed(1) : inr.format(Math.round(a)); }
+
+  /* ---------- The model: per kanal, matches the sheet's Model tab ---------- */
+  function run(s) {
+    var rows = [], cum = 0, minCum = 0, payback = null;
+    var g = s.growth / 100, infl = s.infl / 100, esc = s.leaseEsc / 100;
+    for (var y = 1; y <= s.horizon; y++) {
+      var kgTree = (y <= 4 ? CURVE[y - 1] : 20) * s.yield / 20;
+      var kg = kgTree * TREES;
+      var price = s.price * Math.pow(1 + g, y - 1);
+      var rev = kg * price;
+      var f = Math.pow(1 + infl, y - 1);
+      var capex = y === 1 ? s.estab + s.dev + s.bore : 0;
+      var net = (y === 1 || y === s.hailYear) ? s.hail : 0;
+      var mgmt = s.mgmt * f;
+      var varc = kg * s.varKg * f;
+      var lease = s.lease * Math.pow(1 + esc, Math.floor((y - 1) / 2));
+      var fee = y <= TERMS.feeYears ? TERMS.fee * f : 0;
+      var comm = rev * TERMS.comm;
+      var cost = capex + net + mgmt + varc + lease;
+      var flow = rev - cost - fee - comm;
+      cum += flow;
+      if (cum < minCum) minCum = cum;
+      if (payback === null && cum > 0) payback = y;
+      rows.push({ y: y, kg: kg, price: price, rev: rev, cost: cost, meeraas: fee + comm, out: cost + fee + comm, net: flow, cum: cum });
+    }
+    var cfs = rows.map(function (r) { return r.net; });
+    var d = s.disc / 100;
+    var npv = cfs.reduce(function (t, c, i) { return t + c / Math.pow(1 + d, i + 1); }, 0);  // Excel NPV convention
+    return { rows: rows, irr: irr(cfs), npv: npv, payback: payback, peak: -minCum };
+  }
+
+  function irr(cfs) {
+    function f(r) { var t = 0; for (var i = 0; i < cfs.length; i++) t += cfs[i] / Math.pow(1 + r, i); return t; }
+    var roots = [], prevR = -0.9, prevV = f(prevR);
+    for (var r = -0.88; r <= 5.0001; r += 0.02) {
+      var v = f(r);
+      if (isFinite(v) && isFinite(prevV) && prevV * v <= 0) {
+        var lo = prevR, hi = r;
+        for (var k = 0; k < 80; k++) { var m = (lo + hi) / 2; if (f(lo) * f(m) <= 0) hi = m; else lo = m; }
+        roots.push((lo + hi) / 2);
+      }
+      prevR = r; prevV = v;
+    }
+    if (!roots.length) return null;
+    roots.sort(function (a, b) { return Math.abs(a - 0.1) - Math.abs(b - 0.1); });
+    return roots[0];
+  }
+
+  /* ---------- Controls ---------- */
+  function scenarioFor(s) {
+    for (var k in PRESETS) if (PRESETS[k].price === s.price && PRESETS[k].growth === s.growth) return k;
+    return "custom";
+  }
+  var SC_IDS = { base: "scBase", cons: "scCons", stress: "scStress", custom: "scCustom" };
+
+  function yearOneCost() { return run(Object.assign({}, state, { horizon: 1 })).rows[0].out; }
+
+  function syncControls() {
+    $("budget").value = state.budget;
+    $("kanals").value = state.kanals;
+    $("kanalsRange").value = Math.min(200, state.kanals);
+    $("price").value = state.price;
+    $("growth").value = state.growth;
+    $("yield").value = state.yield;
+    var h = $("h" + state.horizon); if (h) h.checked = true;
+    $(SC_IDS[scenarioFor(state)]).checked = true;
+    COST_IDS.forEach(function (id) { $(id).value = state[id]; });
+    syncOutputs();
+  }
+  function syncOutputs() {
+    $("areaOut").textContent = "≈ " + acres(state.kanals) + " acres";
+    $("priceOut").textContent = "₹" + state.price + "/kg";
+    $("growthOut").textContent = state.growth === 0 ? "flat" : (state.growth > 0 ? "+" : "−") + Math.abs(state.growth).toFixed(1) + "%";
+    $("yieldOut").textContent = state.yield + " kg";
+  }
+
+  function readNum(el, lo, hi) {
+    var v = parseFloat(el.value);
+    if (!isFinite(v)) return null;
+    return Math.min(hi, Math.max(lo, v));
+  }
+
+  $("budget").addEventListener("input", function () {
+    var v = readNum(this, 0, 1e11); if (v === null) return;
+    state.budget = v;
+    var n = Math.floor(v / yearOneCost());
+    if (n >= 1) {
+      state.kanals = Math.min(5000, n);
+      $("kanals").value = state.kanals; $("kanalsRange").value = Math.min(200, state.kanals);
+    }
+    update();
+  });
+  $("budget").addEventListener("change", function () { this.value = state.budget; });
+  $("kanals").addEventListener("input", function () {
+    var v = readNum(this, 1, 5000); if (v === null) return;
+    state.kanals = Math.round(v); $("kanalsRange").value = Math.min(200, state.kanals); update();
+  });
+  $("kanals").addEventListener("change", function () { this.value = state.kanals; });
+  $("kanalsRange").addEventListener("input", function () {
+    state.kanals = +this.value; $("kanals").value = state.kanals; update();
+  });
+  ["price", "growth", "yield"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      state[id] = +this.value;
+      $(SC_IDS[scenarioFor(state)]).checked = true;
+      update();
+    });
+  });
+  document.querySelectorAll('input[name="horizon"]').forEach(function (el) {
+    el.addEventListener("change", function () { state.horizon = +this.value; update(); });
+  });
+  document.querySelectorAll('input[name="scenario"]').forEach(function (el) {
+    el.addEventListener("change", function () {
+      var p = PRESETS[this.value]; if (!p) return;
+      state.price = p.price; state.growth = p.growth;
+      $("price").value = p.price; $("growth").value = p.growth;
+      update();
+    });
+  });
+  var LIMITS = { hailYear: [2, 20], leaseEsc: [0, 50], infl: [0, 25], disc: [0, 40] };
+  COST_IDS.forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      var lim = LIMITS[id] || [0, 1e8];
+      var v = readNum(this, lim[0], lim[1]); if (v === null) return;
+      state[id] = id === "hailYear" ? Math.round(v) : v; update();
+    });
+    $(id).addEventListener("change", function () { this.value = state[id]; });
+  });
+  $("resetBtn").addEventListener("click", function () {
+    var keep = { budget: state.budget, kanals: state.kanals, horizon: state.horizon };
+    state = Object.assign({}, DEF, keep);
+    syncControls(); update();
+  });
+  $("calcForm").addEventListener("submit", function (e) { e.preventDefault(); });
+
+  /* ---------- Render ---------- */
+  var last = null;
+  function update() {
+    syncOutputs();
+    var r = run(state), k = state.kanals, H = state.horizon, rows = r.rows;
+    var total = rows[H - 1].cum * k, invest = rows[0].out * k;
+    var feeTotal = rows.reduce(function (t, x) { return t + x.meeraas; }, 0) * k;
+    var revTotal = rows.reduce(function (t, x) { return t + x.rev; }, 0) * k;
+    var y10 = rows[Math.min(9, H - 1)];
+    var plural = k === 1 ? " kanal" : " kanals";
+    var per = rows[0].out, fits = Math.floor(state.budget / per);
+    $("budgetHint").textContent = fits >= 1
+      ? rsc(state.budget) + " covers " + inr.format(fits) + (fits === 1 ? " kanal" : " kanals") + " at " + rs(per) + " each in Year 1."
+      : "One kanal needs " + rs(per) + " in Year 1.";
+
+    var v = "On " + inr.format(k) + plural + " over " + H + " years, the model ";
+    v += total >= 0 ? "returns <b>" + rsc(total) + "</b> after all costs and our fees. "
+                    : "shows a net loss of <b>" + rsc(-total) + "</b> after all costs and our fees. ";
+    v += "Your " + rsc(invest) + " Year-1 investment " +
+         (r.payback ? "is paid back in <b>Year " + r.payback + "</b>." : "is not paid back within " + H + " years.");
+    $("verdict").innerHTML = v;
+
+    $("tInvest").textContent = rsc(invest);
+    $("tInvestS").textContent = rs(rows[0].out) + " per kanal";
+    $("tPayback").textContent = r.payback ? "Year " + r.payback : "After Y" + H;
+    $("tIrr").textContent = r.irr === null ? "n/a" : pct(r.irr);
+    $("tIrrS").textContent = r.irr === null ? "These cashflows have no meaningful IRR" : "Over " + H + " years, before tax";
+    $("tY10").textContent = rsc(y10.net * k);
+
+    $("mTotalK").textContent = "Total net over " + H + " years";
+    $("mTotal").textContent = rsc(total);
+    $("mNpvK").textContent = "Value today at " + trim(state.disc.toFixed(1)) + "%";
+    $("mNpv").textContent = rsc(r.npv * k);
+    $("mPeak").textContent = rsc(r.peak * k);
+    $("mFeeK").textContent = "Paid to Meeraas, " + H + " years";
+    $("mFee").textContent = rsc(feeTotal) + (revTotal > 0 ? " · " + pct(feeTotal / revTotal, 0) + " of sales" : "");
+
+    $("cfSummary").textContent = "Year-by-year cashflow for " + inr.format(k) + plural + " (" + H + " rows)";
+    $("cfBody").innerHTML = rows.map(function (x) {
+      return "<tr><th scope=\"row\">Y" + x.y + "</th><td>" + inr.format(Math.round(x.kg * k)) + "</td><td>" + x.price.toFixed(1) +
+        "</td><td>" + rs(x.rev * k) + "</td><td>" + rs(x.cost * k) + "</td><td>" + rs(x.meeraas * k) +
+        "</td><td class=\"" + (x.net < 0 ? "neg" : "") + "\">" + rs(x.net * k) +
+        "</td><td class=\"" + (x.cum < 0 ? "neg" : "") + "\">" + rs(x.cum * k) + "</td></tr>";
+    }).join("");
+
+    last = { r: r, k: k, H: H, total: total, invest: invest, feeTotal: feeTotal, y10: y10.net * k };
+    drawChart();
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  /* ---------- Chart: cumulative cash position ---------- */
+  function niceStep(range, count) {
+    var raw = range / count, mag = Math.pow(10, Math.floor(Math.log10(raw))), n = raw / mag;
+    return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * mag;
+  }
+  var chartW = 0;
+  function drawChart() {
+    if (!last) return;
+    var box = $("chart"), W = Math.max(280, Math.floor(box.clientWidth)), narrow = W < 520;
+    chartW = W;
+    var Hh = narrow ? 230 : 280, pad = { l: narrow ? 58 : 70, r: 14, t: 22, b: 30 };
+    var rows = last.r.rows, k = last.k, n = rows.length;
+    var vals = rows.map(function (x) { return x.cum * k; });
+    var lo = Math.min.apply(null, vals.concat(0)), hi = Math.max.apply(null, vals.concat(0));
+    if (hi - lo < 1) hi = lo + 1;
+    var step = niceStep(hi - lo, narrow ? 4 : 5);
+    lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+    var dx = (W - pad.l - pad.r) / (n - 1);
+    function X(i) { return pad.l + i * dx; }
+    function Y(v) { return pad.t + (hi - v) * (Hh - pad.t - pad.b) / (hi - lo); }
+    var y0 = Y(0), s = "";
+    s += '<svg viewBox="0 0 ' + W + " " + Hh + '" width="' + W + '" height="' + Hh + '" role="img" aria-label="Cumulative cash position by year. ' +
+         (last.r.payback ? "Turns positive in Year " + last.r.payback + ". " : "") + "Ends at " + rsc(last.total) + '.">';
+    s += '<g class="ax">';
+    for (var v = lo; v <= hi + step / 2; v += step) {
+      var yy = Y(v).toFixed(1);
+      s += '<line x1="' + pad.l + '" x2="' + (W - pad.r) + '" y1="' + yy + '" y2="' + yy + '"></line>';
+      s += '<text x="' + (pad.l - 8) + '" y="' + yy + '" dy="0.32em" text-anchor="end">' + (Math.abs(v) < step / 2 ? "0" : rsc(v)) + "</text>";
+    }
+    var every = n <= 10 ? 1 : (narrow ? 5 : 2);
+    rows.forEach(function (x, i) {
+      if (i === 0 || x.y % every === 0) s += '<text x="' + X(i).toFixed(1) + '" y="' + (Hh - 8) + '" text-anchor="middle">Y' + x.y + "</text>";
+    });
+    s += "</g>";
+    var pts = vals.map(function (v, i) { return X(i).toFixed(1) + "," + Y(v).toFixed(1); });
+    var area = "M" + X(0).toFixed(1) + "," + y0.toFixed(1) + " L" + pts.join(" L") + " L" + X(n - 1).toFixed(1) + "," + y0.toFixed(1) + " Z";
+    s += '<defs><clipPath id="cpPos"><rect x="0" y="0" width="' + W + '" height="' + Math.max(0, y0).toFixed(1) + '"></rect></clipPath>' +
+         '<clipPath id="cpNeg"><rect x="0" y="' + y0.toFixed(1) + '" width="' + W + '" height="' + Math.max(0, Hh - y0).toFixed(1) + '"></rect></clipPath></defs>';
+    s += '<path class="area-neg" d="' + area + '" clip-path="url(#cpNeg)"></path>';
+    s += '<path class="area-pos" d="' + area + '" clip-path="url(#cpPos)"></path>';
+    s += '<line class="zero" x1="' + pad.l + '" x2="' + (W - pad.r) + '" y1="' + y0.toFixed(1) + '" y2="' + y0.toFixed(1) + '"></line>';
+    s += '<polyline class="cum-line" points="' + pts.join(" ") + '"></polyline>';
+    if (last.r.payback) {
+      var pi = last.r.payback - 1, px = X(pi), py = Y(vals[pi]);
+      var anchor = px > W * 0.7 ? "end" : "start", lx = anchor === "end" ? px - 10 : px + 10;
+      s += '<circle class="pb-dot" cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="5"></circle>';
+      s += '<text class="pb-label" x="' + lx.toFixed(1) + '" y="' + (py - 10).toFixed(1) + '" text-anchor="' + anchor + '">Paid back · Year ' + last.r.payback + "</text>";
+    }
+    s += '<g id="hov" visibility="hidden"><line class="guide" x1="0" x2="0" y1="' + pad.t + '" y2="' + (Hh - pad.b) + '"></line><circle class="hover-dot" r="5" cx="0" cy="0"></circle></g>';
+    s += '<rect id="hit" x="' + pad.l + '" y="0" width="' + (W - pad.l - pad.r) + '" height="' + Hh + '" fill="transparent"></rect>';
+    s += "</svg>";
+    box.innerHTML = s;
+
+    var svg = box.querySelector("svg"), hov = svg.querySelector("#hov"), guide = hov.querySelector("line"), dot = hov.querySelector("circle");
+    function at(ev) {
+      var rect = svg.getBoundingClientRect(), sx = W / rect.width;
+      var i = Math.round(((ev.clientX - rect.left) * sx - pad.l) / dx);
+      i = Math.max(0, Math.min(n - 1, i));
+      var x = X(i).toFixed(1), y = Y(vals[i]).toFixed(1);
+      guide.setAttribute("x1", x); guide.setAttribute("x2", x);
+      dot.setAttribute("cx", x); dot.setAttribute("cy", y);
+      hov.setAttribute("visibility", "visible");
+      $("readout").textContent = "Year " + rows[i].y + " · that year " + rsc(rows[i].net * k) + " · running total " + rsc(vals[i]);
+    }
+    var hit = svg.querySelector("#hit");
+    hit.addEventListener("pointermove", at);
+    hit.addEventListener("pointerdown", at);
+    hit.addEventListener("pointerleave", function () {
+      hov.setAttribute("visibility", "hidden");
+      $("readout").textContent = "Hover or tap the chart for any year";
+    });
+  }
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(function () {
+      var w = Math.floor($("chart").clientWidth);
+      if (w && Math.abs(w - chartW) > 2) drawChart();
+    }).observe($("chart"));
+  } else {
+    window.addEventListener("resize", drawChart);
+  }
+
+  /* ---------- Copy estimate ---------- */
+  function estimateText() {
+    var L = last, s = state, k = s.kanals;
+    var growth = s.growth === 0 ? "flat" : (s.growth > 0 ? "rising " : "falling ") + Math.abs(s.growth) + "% a year";
+    return [
+      "Meeraas-e-Kashmir orchard estimate",
+      "Holding: " + inr.format(k) + (k === 1 ? " kanal" : " kanals") + " (about " + acres(k) + " acres), " + s.horizon + "-year view",
+      "Price: ₹" + s.price + "/kg, " + growth + "; " + s.yield + " kg per mature tree",
+      "Year-1 investment: " + rs(L.invest),
+      "Payback: " + (L.r.payback ? "Year " + L.r.payback : "not within " + s.horizon + " years"),
+      "IRR: " + (L.r.irr === null ? "n/a" : pct(L.r.irr)) + " · Value today at " + s.disc + "%: " + rs(L.r.npv * k),
+      "Net income in Year " + Math.min(10, s.horizon) + ": " + rs(L.y10),
+      "Total net over " + s.horizon + " years: " + rs(L.total),
+      "Paid to Meeraas over " + s.horizon + " years: " + rs(L.feeTotal)
+    ].join("\n");
+  }
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var wrap = btn.closest(".share"), status = wrap.querySelector("[data-copy-status]");
+    var fb = wrap.querySelector("[data-fallback]") || wrap.parentNode.querySelector("[data-fallback]");
+    var idle = status.textContent;
+    btn.addEventListener("click", function () {
+      var text = estimateText();
+      function fallback() {
+        fb.value = text; fb.hidden = false; fb.focus(); fb.select();
+        status.textContent = "Select the text below and copy it.";
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          status.textContent = "Copied. Paste it into a message to your advisor.";
+          setTimeout(function () { status.textContent = idle; }, 4000);
+        }, fallback);
+      } else { fallback(); }
+    });
+  });
+
+  /* ---------- Hero: a misty mountain ridge behind the valley ---------- */
+  (function ridge() {
+    function line(seed, base, amp, waves) {
+      var pts = [];
+      for (var x = 0; x <= 1440; x += 12) {
+        var y = base;
+        waves.forEach(function (w, i) { y -= amp * w * Math.sin(x / (180 / (i + 1)) + seed * (i + 1.7)); });
+        y -= amp * 0.9 * Math.exp(-Math.pow((x - (seed * 260 % 1440)) / 160, 2));   // one taller peak
+        pts.push(x + "," + y.toFixed(1));
+      }
+      return "M0,220 L" + pts.join(" L") + " L1440,220 Z";
+    }
+    $("ridge").innerHTML =
+      '<path class="far" d="' + line(2.3, 120, 34, [0.55, 0.3, 0.15]) + '"></path>' +
+      '<path class="near" d="' + line(4.1, 170, 22, [0.5, 0.35, 0.2]) + '"></path>';
+  })();
+
+  /* ---------- Hero: high-density apple trees growing through Years 1–5 ---------- */
+  (function orchard() {
+    var svg = $("orchardSvg"), W = 560, seed = 7;
+    function rnd() { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+    function f(n) { return n.toFixed(1); }
+
+    // One spindle-trained tree, drawn full size with its base at (0,0)
+    function tree(nLeaves) {
+      var t = '<ellipse class="shadow" cx="0" cy="0" rx="24" ry="4"></ellipse>';
+      t += '<path class="trunk" d="M-3,0 L3,0 L1.2,-142 L-1.2,-142 Z"></path>';
+      for (var b = 0; b < 7; b++) {
+        var by = -34 - b * 15, len = 32 * (1 - b / 8), side = b % 2 ? 1 : -1;
+        t += '<path class="branch" d="M0,' + by + " q" + f(side * len * 0.5) + ",-2 " + f(side * len) + ',5"></path>';
+      }
+      var leaves = [];
+      for (var l = 0; l < nLeaves; l++) {
+        var u = Math.pow(rnd(), 0.85), ly = -30 - u * 116, w = 32 * (1 - u) + 6;
+        var lx = (rnd() * 2 - 1) * w, rx = 8 + rnd() * 5, ry = 6 + rnd() * 4, rot = (rnd() - 0.5) * 60, sh = rnd();
+        var c = sh < 0.38 ? 1 : sh < 0.75 ? 2 : 3;
+        leaves.push([c, '<ellipse class="lf' + c + '" cx="' + f(lx) + '" cy="' + f(ly) + '" rx="' + f(rx) + '" ry="' + f(ry) +
+          '" transform="rotate(' + rot.toFixed(0) + " " + f(lx) + " " + f(ly) + ')"></ellipse>']);
+      }
+      leaves.sort(function (a, b) { return a[0] - b[0]; });
+      t += leaves.map(function (x) { return x[1]; }).join("");
+      for (var a = 0; a < 18; a++) {
+        var v = 0.04 + rnd() * 0.7, ay = -34 - v * 110, aw = (32 * (1 - v) + 4) * 0.85, ax = (rnd() * 2 - 1) * aw;
+        t += '<g class="ap" data-i="' + a + '" style="transition-delay:' + Math.round(rnd() * 450) + 'ms"><circle cx="' + f(ax) + '" cy="' + f(ay) +
+          '" r="4.6"></circle><circle cx="' + f(ax - 1.4) + '" cy="' + f(ay - 1.6) + '" r="1.3"></circle></g>';
+      }
+      return t;
+    }
+
+    var s = '<rect class="sc-sky" x="0" y="0" width="' + W + '" height="320"></rect>';
+    var hill = [];
+    for (var x = 0; x <= W; x += 10) {
+      hill.push(x + "," + f(112 - 13 * Math.sin(x / 70 + 1.3) - 7 * Math.sin(x / 33 + 0.4) - 34 * Math.exp(-Math.pow((x - 390) / 70, 2))));
+    }
+    s += '<path class="sc-hill" d="M0,150 L' + hill.join(" L") + " L" + W + ',150 Z"></path>';
+    s += '<rect class="sc-ground" x="0" y="140" width="' + W + '" height="180"></rect>';
+
+    var ROWS = [
+      { y: 162, s: 0.46, n: 12, x0: 24, x1: 536, leaves: 26, cls: "sc-row1" },
+      { y: 226, s: 0.72, n: 9, x0: 30, x1: 530, leaves: 34, cls: "sc-row2" },
+      { y: 312, s: 1.12, n: 6, x0: 56, x1: 504, leaves: 46, cls: "" }
+    ];
+    ROWS.forEach(function (R) {
+      var step = (R.x1 - R.x0) / (R.n - 1), ph = 140 * R.s, g = '<g class="' + R.cls + '">';
+      g += '<rect class="sc-alley" x="0" y="' + f(R.y - 4 * R.s) + '" width="' + W + '" height="' + f(9 * R.s) + '" rx="' + f(4 * R.s) + '"></rect>';
+      var first = R.x0 - step / 2, last = R.x1 + step / 2, posts = [];
+      for (var p = first; p < last - 1; p += step * 3) posts.push(p);
+      posts.push(last);
+      [0.3, 0.55, 0.8].forEach(function (h) {
+        var wy = f(R.y - ph * h);
+        g += '<line class="wire" x1="' + f(first) + '" x2="' + f(last) + '" y1="' + wy + '" y2="' + wy + '"></line>';
+      });
+      posts.forEach(function (px) {
+        g += '<rect class="post" x="' + f(px - 1.6 * R.s) + '" y="' + f(R.y - ph) + '" width="' + f(3.2 * R.s) + '" height="' + f(ph) + '"></rect>';
+      });
+      for (var i = 0; i < R.n; i++) {
+        var tx = R.x0 + i * step + (rnd() - 0.5) * step * 0.12;
+        g += '<g transform="translate(' + f(tx) + "," + R.y + ") scale(" + R.s + ')"><g class="grow">' + tree(R.leaves) + "</g></g>";
+      }
+      s += g + "</g>";
+    });
+    svg.innerHTML = s;
+
+    var apples = svg.querySelectorAll(".ap"), btns = document.querySelectorAll(".stages button");
+    var STAGES = [
+      { t: "Year 1 · Planting", kg: 0, g: 0.32, n: 0 },
+      { t: "Year 2 · First fruit", kg: 5, g: 0.58, n: 3 },
+      { t: "Year 3 · Commercial crop", kg: 17, g: 0.84, n: 12 },
+      { t: "Year 4 · Canopy fills in", kg: 17, g: 0.93, n: 12 },
+      { t: "Year 5 onward · Full bearing", kg: 20, g: 1, n: 18 }
+    ];
+    function show(i) {
+      var st = STAGES[i];
+      svg.style.setProperty("--g", st.g);
+      apples.forEach(function (a) { a.classList.toggle("on", +a.getAttribute("data-i") < st.n); });
+      btns.forEach(function (b, j) { b.setAttribute("aria-pressed", String(j === i)); });
+      $("planCap").innerHTML = "<strong>" + st.t + "</strong><span>" +
+        (st.kg ? st.kg + " kg a tree · " + inr.format(st.kg * TREES) + " kg from one kanal" : "No crop yet · saplings take root on the trellis") + "</span>";
+    }
+    var timer = null;
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () { if (timer) { clearInterval(timer); timer = null; } show(+b.getAttribute("data-stage")); });
+    });
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { show(4); return; }
+    var i = 0; show(0);
+    timer = setInterval(function () { i++; show(i); if (i >= 4) { clearInterval(timer); timer = null; } }, 1300);
+  })();
+
+  syncControls();
+  update();
+})();
+</script>
+</body>
+</html>
