@@ -38,7 +38,7 @@ img{max-width:100%}
   --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
   --f-mono:ui-monospace,Menlo,Consolas,monospace;
   --f-urdu:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Noto Naskh Arabic",serif;
-  --wrap:1160px;
+  --wrap:1440px;
   color-scheme:light;
 }
 
@@ -50,7 +50,7 @@ a{color:inherit}
 h1,h2,h3{font-family:var(--f-display);font-weight:500;margin:0;text-wrap:balance;letter-spacing:-.015em;font-optical-sizing:auto}
 p{margin:0}
 fieldset{border:0;margin:0;padding:0;min-width:0}
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,3.5vw,56px)}
 .eyebrow{font:600 .72rem/1.3 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .src{font:400 .78rem/1.45 var(--f-body);color:var(--muted)}
 .num{font-variant-numeric:tabular-nums lining-nums}
@@ -138,7 +138,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .photos{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(16px,2.5vw,28px);margin-bottom:clamp(36px,5vw,56px)}
 @media (max-width:760px){.photos{grid-template-columns:1fr}}
 .photos figure{margin:0;display:grid;gap:10px;min-width:0}
-.photos img{display:block;width:100%;aspect-ratio:3/2;max-width:100%;object-fit:cover;border-radius:2px;background:var(--sunk)}
+.photos img{display:block;width:100%;height:auto;aspect-ratio:3/2;max-width:100%;object-fit:cover;border-radius:2px;background:var(--sunk)}
 .photos figcaption b{display:block;font:500 1.05rem/1.35 var(--f-display);color:var(--ink);margin-bottom:2px}
 .credits{font-size:.74rem;color:var(--muted);max-width:none}
 .credits a{color:var(--muted)}
@@ -186,7 +186,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 }
 
 /* Calculator */
-.calc{display:grid;grid-template-columns:minmax(0,370px) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
+.calc{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
 @media (max-width:960px){.calc{grid-template-columns:1fr}}
 .panel{background:var(--surface);border:1px solid var(--line);padding:clamp(18px,2.4vw,26px);display:grid;gap:24px;min-width:0}
 .panel-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
@@ -988,9 +988,10 @@ input[type=range]{width:100%;margin:0;accent-color:var(--apple)}
     s += '<polyline class="cum-line" points="' + pts.join(" ") + '"></polyline>';
     if (last.r.payback) {
       var pi = last.r.payback - 1, px = X(pi), py = Y(vals[pi]);
-      var anchor = px > W * 0.7 ? "end" : "start", lx = anchor === "end" ? px - 10 : px + 10;
+      var roomLeft = px - pad.l > 130;
+      var anchor = roomLeft ? "end" : "start", lx = roomLeft ? px - 10 : px + 10, ly = roomLeft ? py - 12 : py + 26;
       s += '<circle class="pb-dot" cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="5"></circle>';
-      s += '<text class="pb-label" x="' + lx.toFixed(1) + '" y="' + (py - 10).toFixed(1) + '" text-anchor="' + anchor + '">Paid back · Year ' + last.r.payback + "</text>";
+      s += '<text class="pb-label" x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="' + anchor + '">Paid back · Year ' + last.r.payback + "</text>";
     }
     s += '<g id="hov" visibility="hidden"><line class="guide" x1="0" x2="0" y1="' + pad.t + '" y2="' + (Hh - pad.b) + '"></line><circle class="hover-dot" r="5" cx="0" cy="0"></circle></g>';
     s += '<rect id="hit" x="' + pad.l + '" y="0" width="' + (W - pad.l - pad.r) + '" height="' + Hh + '" fill="transparent"></rect>';
